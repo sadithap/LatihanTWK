@@ -11,10 +11,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  useFonts({
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),}
-  );
-
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }} >
