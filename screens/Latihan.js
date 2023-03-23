@@ -13,16 +13,19 @@ const Latihan = () => {
 
   function answerHandler(answer) {
     setRespon(answer);
-    if (answer === formSoal[currentIndex].jawaban) {
+  }
+
+  function nextHandler(){
+    if (respon === formSoal[currentIndex].jawaban) {
       setScore(score + 1);
     }
-    if (currentIndex < formSoal.length - 1) {
-      //setCurrentIndex(currentIndex + 1);
-    } else {
-      alert(`Your score: ${score}`);
-      setCurrentIndex(0);
-      setScore(0);
-    }
+    setCurrentIndex(currentIndex + 1);
+  }
+
+  function finishHandler() {
+    alert(`Your score : ${score}`);
+    setCurrentIndex(0);
+    setScore(0);
   }
 
   return (
@@ -39,6 +42,15 @@ const Latihan = () => {
             {option}
           </OptionButton>
         ))}
+        <View style={styles.changeQuestion}>
+          <View>
+          
+          </View>
+          <View>
+          {currentIndex!==formSoal.length-1 && <PrimaryButton onpressed={nextHandler} >Next</PrimaryButton>}
+          {currentIndex===formSoal.length-1 && <PrimaryButton onpressed={finishHandler}>Finish</PrimaryButton> }
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -60,10 +72,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 100,
   },
-  optionPressed: {
-    borderColor: "#990000",
-  },
-  option: {
-    borderColor: colors.primary2,
+  changeQuestion: {
+    marginTop: 40,
+    marginBottom: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

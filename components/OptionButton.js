@@ -2,15 +2,11 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Pressable } from "react-native";
 import colors from "../constants/Colors";
-const OptionButton = ({ children, onpressed }) => {
+const OptionButton = ({ children, onpressed, respon }) => {
   return (
     <View style={styles.container}>
       <Pressable
-        style={({ pressed }) =>
-          pressed
-            ? [styles.content, styles.press]
-            : [styles.content, styles.contentColor]
-        }
+        style={[styles.content, respon === children && styles.press]}
         onPress={onpressed}
       >
         <Text style={styles.textContent}>{children}</Text>
@@ -33,8 +29,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,
-  },
-  contentColor: {
     backgroundColor: colors.primary1,
   },
   press: {
