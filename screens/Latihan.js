@@ -1,14 +1,69 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import colors from "../constants/Colors";
+import formSoal from "../constants/FormSoal";
+import PrimaryButton from "../components/PrimaryButton";
+import OptionButton from "../components/OptionButton";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Latihan = () => {
+  const [score, setScore] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [respon, setRespon] = useState("");
+
+  function answerHandler(answer) {
+    setRespon(answer);
+    if (answer === formSoal[currentIndex].jawaban) {
+      setScore(score + 1);
+    }
+    if (currentIndex < formSoal.length - 1) {
+      //setCurrentIndex(currentIndex + 1);
+    } else {
+      alert(`Your score: ${score}`);
+      setCurrentIndex(0);
+      setScore(0);
+    }
+  }
+
   return (
-    <View>
-      <Text>Latihan</Text>
-    </View>
-  )
-}
+    <SafeAreaView style={styles.rootContainer}>
+      <View style={styles.container}>
+        <Text style={styles.question}>{formSoal[currentIndex].soal}</Text>
+        {console.log(formSoal[currentIndex].pilgan)}
+        {formSoal[currentIndex].pilgan.map((option, index) => (
+          <OptionButton
+            key={index}
+            respon={respon}
+            onpressed={() => answerHandler(option)}
+          >
+            {option}
+          </OptionButton>
+        ))}
+      </View>
+    </SafeAreaView>
+  );
+};
 
-export default Latihan
+export default Latihan;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    backgroundColor: colors.primary1,
+  },
+  container: {
+    marginTop: 50,
+    padding: 10,
+  },
+  question: {
+    color: colors.primary4,
+    fontSize: 20,
+    marginBottom: 100,
+  },
+  optionPressed: {
+    borderColor: "#990000",
+  },
+  option: {
+    borderColor: colors.primary2,
+  },
+});

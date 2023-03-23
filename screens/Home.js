@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 
 import colors from "../constants/Colors";
 import PrimaryButton from "../components/PrimaryButton";
-import { Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = ({ navigation }) => {
